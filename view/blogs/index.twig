@@ -1,0 +1,58 @@
+{% extends "../layout.twig" %}
+
+{% block main %}
+
+    <form>
+        <label>search by title :
+            <input name="title" type="text"/></label>
+        <input type="submit" value="search"/>
+
+    </form>
+    {% if blogs is empty %}
+
+        <h1>there is no blogs in the data base (for your search value maybe)</h1>
+    {% else %}
+
+        <br/>
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>description</th>
+                <th>type</th>
+                <th>isStolen</th>
+                <th>stolenSource</th>
+                <th>date</th>
+                <th>userName</th>
+                <th>detail</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            {% for blog in blogs %}
+
+                <tr>
+                    <td>{{blog.id}}</td>
+                    <td>{{blog.title}}</td>
+                    <td>{{blog.description}}</td>
+                    <td>{{blog.type.name}}</td>
+                    <td>{{blog.isStolen}}</td>
+                    <td>{{blog.isStolen ? blog.stolenSource  : "not stolen :)"}}</td>
+                    <td>{{blog.date|date("m/d/Y")}}</td>
+                    <td>{{blog.user.userName}}</td>
+                    <td>
+                        <a href="/blogs/{{blog.id}}">detail</a>
+                    </td>
+                    <td>
+                        <a href="/blogs/update/{{blog.id}}">update</a>
+                    </td>
+                    <td>
+                        <a href="/blogs/delete/{{blog.id}}">delete</a>
+                    </td>
+                </tr>
+
+
+            {% endfor %}
+
+        {% endif %}
+    </table>
+{% endblock %}

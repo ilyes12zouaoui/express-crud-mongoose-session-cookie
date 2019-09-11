@@ -1,0 +1,48 @@
+{% extends "../layout.twig" %}
+
+{% block main %}
+    <h1>create</h1>
+    <form action="/blogs/create" method="post">
+
+        <label>title :
+            <input name="title" type="text"/></label><br/>
+        <label>description :
+            <textarea name="description" value="aaaa"></textarea>
+        </label>
+        <br>
+        <label>
+            type :
+            <select name="type">
+                {% for type in types %}
+                    <option value="{{type.id}}">{{type.name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <br>
+            <label>
+                is stolen :
+                <input name="isStolen" onchange="onCheckChange(this.checked);" type="checkbox"/>
+            </label>
+        </br>
+
+        <label>
+            stolen Source :
+            <input disabled id="stolenSource" name="stolenSource" type="text"/>
+        </label>
+    </br>
+
+    <input type="submit" value="create">
+</form>
+{% if errors is defined %}
+    <ul class="errors" style="color:red;">
+        {% for error in errors %}
+            <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}{% endblock %}{% block scripts %}
+<script>
+    function onCheckChange(value) {
+
+        document.getElementById("stolenSource").disabled = (! value);
+    }
+</script>{% endblock %}

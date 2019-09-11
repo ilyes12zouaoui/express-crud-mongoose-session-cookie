@@ -1,0 +1,65 @@
+{% extends "../layout.twig" %}
+
+{% block main %}
+    <h1>update</h1>
+    <form action="/blogs/update/{{blog.id}}" method="POST">
+
+        <label>title :
+            <input name="title" type="text" value="{{blog.title}}"/></label><br/>
+        <label>description :
+            <textarea name="description">{{blog.description}}</textarea>
+        </label>
+        <br>
+        <label>
+            type :
+
+            <select name="type">
+                {% for type in types %}
+                    <option value="{{type.id}}" {% if type.id == blog.type %} selected {% endif %}>{{type.name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <br>
+            <label>
+                is stolen :
+                <input name="isStolen" {{blog.isStolen ? "checked=\"checked\"" : ""}} onchange="onCheckChange(this.checked);" type="checkbox"/>
+            </label>
+        </br>
+
+        <label>
+            stolen Source :
+            <input {{blog.isStolen ? "" : "disabled"}} id="stolenSource" value="{{ blog.stolenSource }}" name="stolenSource" type="text"/>
+        </label>
+    </br>
+
+    <input type="submit" value="update">
+</form>
+{% if errors is defined %}
+    <ul class="errors" style="color:red;">
+        {% for error in errors %}
+            <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}{% endblock %}{% block scripts %}
+<script>
+    function onCheckChange(value) {
+
+        document.getElementById("stolenSource").disabled = (! value);
+    }
+</script>{% endblock %}{# <input name="sexe" type="radio" value="false" {% if category.sexe == false %} checked="checked" {% endif %}/>Femme
+                                                                                                                                                                            <input name="sexe" type="radio" value="true" {% if category.sexe == true %} checked="checked" {% endif %}/>Homme<br/>
+                                                                                                                                                                            <label>Email :
+                                                                                                                                                                            </label>
+                                                                                                                                                                            <input name="email" type="email" value="{{category.email}}"/><br/>
+                                                                                                                                                                            <label>Téléphone :
+                                                                                                                                                                            </label>
+                                                                                                                                                                            <input max="99999999" name="telephone" type="number" value="{{category.telephone}}"/><br/>
+                                                                                                                                                                            <select name="option">
+                                                                                                                                                                                <optgroup label="--choisir option--">
+                                                                                                                                                                                    <option value="TWIN" {% if category.option=="TWIN" %} selected {% endif %}>TWIN</option>
+                                                                                                                                                                                    <option value="GL" {% if category.option=="GL" %} selected {% endif %}>GL</option>
+                                                                                                                                                                                    <option value="SIM" {% if category.option=="SIM" %} selected {% endif %}>SIM</option>
+                                                                                                                                                                                    <option value="ARCTIC" {% if category.option=="ARCTIC" %} selected {% endif %}>ARCTIC</option>
+                                                                                                                                                                                </optgroup>
+                                                                                                                                                                            </select>
+                                                                                                                                                                            <br/> #}

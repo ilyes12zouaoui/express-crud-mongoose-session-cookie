@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+        <title>
+            {% block pageTitle %}{% endblock %}
+        </title>
+        {% block headerCss %}{% endblock %}
+    </head>
+    <body>
+        <header style="margin:20px 0">
+            <a href="/">index</a>
+            {% if user.isAuthenticated %}
+                <a href="/types/">list types</a>
+                <a href="/blogs/create">add blog</a>
+                <a href="/blogs/">list blogs</a>
+                <a href="/types/create">add type</a>
+
+                <a href="/">{{user.userName}}</a>
+                <a href="/logout">logout</a>
+
+            {% else %}
+                <a href="/register">register</a>
+                <a href="/login">login</a>
+
+            {% endif %}
+
+        </header>
+        {% block main %}
+            {% include "main.html" %}
+        {% endblock %}
+        {% block footer %}
+            {% include "footer.html" %}
+        {% endblock %}
+        <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html></body></html>

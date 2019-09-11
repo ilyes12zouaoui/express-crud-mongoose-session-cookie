@@ -1,0 +1,27 @@
+{% extends "layout.twig" %}
+
+{% block pageTitle %}
+    register
+{% endblock %}
+
+{% block main %}
+    <h1>register</h1>
+    <form action="/register" method="post">
+
+        <label>user name :
+            <input name="userName" type="text"/></label><br/>
+        <label>email :
+            <input name="email" type="email"/></label><br/>
+        <label>password :
+            <input name="password" type="password"/></label><br/>
+
+        <input type="submit" value="register">
+    </form>
+    {% if errors is defined %}
+        <ul class="errors" style="color:red;">
+            {% for error in errors %}
+                <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

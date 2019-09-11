@@ -1,0 +1,23 @@
+{% extends "../layout.twig" %}
+
+{% block pageTitle %}
+    create type
+{% endblock %}
+
+{% block main %}
+    <h1>create</h1>
+    <form action="/types/create" method="post">
+
+        <label>name :
+            <input name="name" type="text"/></label><br/>
+
+        <input type="submit" value="create">
+    </form>
+    {% if errors is defined %}
+        <ul class="errors" style="color:red;">
+            {% for error in errors %}
+                <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

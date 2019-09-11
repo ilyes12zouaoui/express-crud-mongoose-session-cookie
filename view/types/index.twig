@@ -1,0 +1,46 @@
+{% extends "../layout.twig" %}
+
+{% block main %}
+
+    <form>
+        <label>search :
+            <input name="name" type="text"/></label>
+        <input type="submit" value="search"/>
+
+    </form>
+    {% if types is empty %}
+
+        <h1>there is no types in the data base (for your search value maybe)</h1>
+    {% else %}
+
+        <br/>
+        <table border="1">
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>detail</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            {% for type in types %}
+
+                <tr>
+                    <td>{{type.id}}</td>
+                    <td>{{type.name}}</td>
+                    <td>
+                        <a href="/types/{{type.id}}">detail</a>
+                    </td>
+                    <td>
+                        <a href="/types/update/{{type.id}}">update</a>
+                    </td>
+                    <td>
+                        <a href="/types/delete/{{type.id}}">delete</a>
+                    </td>
+                </tr>
+
+
+            {% endfor %}
+
+        {% endif %}
+    </table>
+{% endblock %}
